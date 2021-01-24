@@ -1,0 +1,16 @@
+<div @todosAnimation>
+    <h1>Posts</h1>
+    <input type="text" (keyup.enter)="createPost(title)" #title class="form-control">
+    <ul class="list-group">
+        <li @todoAnimation *ngFor="let post of posts; even as isEven" class="list-group-item"
+            [ngStyle]="{'color': isEven? 'green' : 'red'} ">
+            <button class="btn btn-info btn-sm" (click)="updatePost(post)">Update</button>
+            <button class="btn btn-primary btn-sm" (click)="patchPost(post)">Patch</button>
+            <button class="btn btn-danger btn-sm" (click)="deletePost(post)">Delete</button>
+            {{"Id : " + post.id}} <br>
+            {{"userId : " + post.userId}} <br>
+            {{"Title : " + post.title}} <br>
+            {{"Body : " + post.body}}
+        </li>
+    </ul>
+</div>

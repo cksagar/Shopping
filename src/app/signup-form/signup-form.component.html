@@ -1,0 +1,79 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <form [formGroup]="signUpForm" (ngSubmit)="login()">
+                    <div *ngIf="signUpForm.errors" class="alert alert-danger">
+                        Inavlid email or password...
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" formControlName="name" type="text" class="form-control">
+                        <div *ngIf="signUpForm.get('name').pending">Checking Valid name...</div>
+                        <div *ngIf="signUpForm.get('name').touched && signUpForm.get('name').invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="name.errors.required">
+                                name is required.
+                            </div>
+                            <div *ngIf="name.errors.minlength">
+                                minium length {{ name.errors.minlength.requiredLength}} is
+                                required.
+                            </div>
+                            <div *ngIf="name.errors.cannotContainSpace">
+                                space is not allowed.
+                            </div>
+                            <div *ngIf="name.errors.shouldBeUnique">
+                                name must be unique
+                            </div>
+                        </div>
+                    </div>
+
+                    <div formGroupName="account">
+                        <div class="form-group">
+                            <label for="account.username">Username</label>
+                            <input id="account.username" formControlName="username" type="text" class="form-control">
+                            <div *ngIf="signUpForm.get('account.username').pending">Checking Valid username...</div>
+                            <div *ngIf="signUpForm.get('account.username').touched && signUpForm.get('account.username').invalid"
+                                class="alert alert-danger">
+                                <div *ngIf="signUpForm.get('account.username').errors.required">
+                                    Username is required.
+                                </div> 
+                                <div *ngIf="signUpForm.get('account.username').errors.minlength">
+                                    minium length {{
+                                    signUpForm.get('account.username').errors.minlength.requiredLength}} is
+                                    required.
+                                </div>
+                                <div *ngIf="signUpForm.get('account.username').errors.cannotContainSpace">
+                                    space is not allowed.
+                                </div>
+                                <div *ngIf="signUpForm.get('account.username').errors.shouldBeUnique">
+                                    username must be unique
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input id="password" formControlName="password" type="text" class="form-control">
+                            <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                                <div *ngIf="password.errors.required"> password is required.</div>
+                                <div *ngIf="password.errors.minlength"> password should be min 6 charectors.</div>
+                                <div *ngIf="password.errors.cannotContainSpace">
+                                    space is not allowed.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="text" (keyup.enter)="addTopic(topic)" #topic class="form-control">
+                    <ul class="list-group">
+                        <li *ngFor="let topic of topics.controls" (click)="removeTopic()" class="list-group-item">
+                            {{ topic.value}}
+                        </li>
+                    </ul>
+                    <button class="btn btn-primary" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

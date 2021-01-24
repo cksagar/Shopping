@@ -1,0 +1,87 @@
+<!-- Side navigation -->
+<div class="sidenav">
+  <a href="#">About</a>
+  <div>
+    <p>female</p> {{ femaleCount}}
+  </div>
+  <div>
+    <p>male</p> {{ maleCount}}
+  </div>
+  <div>
+    <mat-progress-bar mode="determinate" [value]="value"></mat-progress-bar>
+  </div>
+</div>
+
+<!-- Page content -->
+<div class="main">
+  ...
+</div>
+
+<!-- <div>
+    {{"data from paret is " + favorVar}}
+</div> -->
+
+
+<button class="btn btn-primary" (click)="onClickFav()"> click to send</button>
+<div class="jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h3>Angular 6 Template-Driven Form Validation</h3>
+
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input required minlength="3" ngModel #firstName="ngModel" name="firstName" id="firstName" type="text"
+              class="form-control" />
+
+            <div *ngIf="firstName.touched && !firstName.valid" class="alert alert-danger">
+              <div *ngIf=firstName.errors.required>First name is required.</div>
+              <div *ngIf=firstName.errors.minlength>min 3 charectors is required.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input ngModel name="isSubscribed" type="checkbox">
+              Subscribe to mail
+            </label>
+          </div>
+
+          <div class="radio">
+            <label>
+              <input ngModel name="gender" type="radio" value="male">
+              male
+            </label>
+
+          </div>
+          <div class="radio">
+            <label>
+              <input ngModel name="gender" type="radio" value="female">
+              female
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label for="contactMethod">selecct a type</label>
+            <select multiple class="form-control" [(ngModel)]="contactValue" name="contactMethod" from-control
+              id="contactMethod">
+              <option *ngFor="let contact of contactMethod" [value]="contact.value">
+                {{ contact.name}}
+              </option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea [(ngModel)]='comment' name="comment" id="comment" cols="10" rows="3" type="text"
+              class="form-control" placeholder="teype here.."></textarea>
+          </div>
+
+          <p>{{ f.value | json}}</p>
+          <button class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
